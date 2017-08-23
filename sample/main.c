@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/05 18:29:55 by tiboitel          #+#    #+#             */
-/*   Updated: 2017/08/23 16:15:02 by tiboitel         ###   ########.fr       */
+/*   Created: 2017/08/23 18:46:56 by tiboitel          #+#    #+#             */
+/*   Updated: 2017/08/23 18:47:47 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <unistd.h>
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+int		main(void)
 {
-	size_t	i;
-
-	i = 0;
-	while (i < n && (src + i))
-	{
-		(*(unsigned char *)dst) = (*(unsigned char *)src);
-		dst++;
-		src++;
-		i++;
-	}
-	return ((void *)dst - n);
+	write(1, "Hello world!\n", 13);
+	return (0);
 }

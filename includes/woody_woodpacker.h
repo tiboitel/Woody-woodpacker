@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/10 17:33:02 by tiboitel          #+#    #+#             */
-/*   Updated: 2017/08/10 23:33:24 by tiboitel         ###   ########.fr       */
+/*   Updated: 2017/08/23 18:08:55 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <sys/stat.h>
 # include <sys/mman.h>
+# include <sys/syscall.h>
 # include "libft.h"
 # define DELTA 0x9e3779b9
 # define SUM 0xC6EF3720
@@ -30,8 +31,8 @@
 */
 void	tea_encrypt(uint32_t *value, uint32_t *key);
 void	tea_decrypt(uint32_t *value, uint32_t *key);
-char	*encrypt_binary(void *binary, uint32_t *size, uint32_t *key);
-char	*decrypt_binary(char *data, uint32_t size, uint32_t *key);
+void	*encrypt_binary(void *binary, uint32_t *size, uint32_t *key);
+void	*decrypt_binary(void *data, uint32_t size, uint32_t *key);
 /*
 ** 2. Loader section.
 **

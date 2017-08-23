@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/10 17:19:40 by tiboitel          #+#    #+#             */
-/*   Updated: 2017/08/10 23:45:14 by tiboitel         ###   ########.fr       */
+/*   Updated: 2017/08/23 19:45:38 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		main(int argc, char **argv)
 	uint32_t	binary_size;
 	uint32_t 	key[4];
 	char		*cipher;
-	char		*binary2;
+	uint8_t		*binary2;
 	
 	binary2 = NULL;
 	key[0] = 7493;
@@ -48,7 +48,7 @@ int		main(int argc, char **argv)
 	unsigned int i = 0;
 	while (i < binary_stat.st_size)
 	{
-		if (*((char *)(binary) + i) != binary2[i])
+		if (*((uint8_t *)(binary) + i) != binary2[i])
 			printf("Fuck off! Test: %c != %c\n", *((char *)(binary) + i), binary2[i]);
 		i++;
 	}

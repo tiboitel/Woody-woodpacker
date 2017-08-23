@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/10 17:57:40 by tiboitel          #+#    #+#             */
-/*   Updated: 2017/08/10 23:55:03 by tiboitel         ###   ########.fr       */
+/*   Updated: 2017/08/23 16:21:52 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,45 +70,43 @@ void		tea_decrypt(uint32_t *value, uint32_t *key)
 	value[1] = v1;
 }
 
-char		*encrypt_binary(void *binary, uint32_t *size, uint32_t *key)
+void		*encrypt_binary(void *binary, uint32_t *size, uint32_t *key)
 {
 	uint32_t			i;
-	char			*bytes;
-	char			buffer[9];
+	void			*bytes;
+	uint8_t			buffer[8];
 	
 	bytes = NULL;
 	ft_bzero(buffer, 8);
-	buffer[8] = '\0';
 	if (!(bytes = ((char *)ft_memalloc(sizeof(char) * *size))))
 		return (NULL);
 	i = 0;
 	while (i < *size)
 	{
-		ft_strncpy(buffer, binary + i, 8);	
-		printf("%s", buffer);
-		tea_encrypt((void *)(buffer), key);
-		strncpy(bytes + i, buffer, 8);
+		ft_memcpy(buffer, binary + i, 8);	
+		tea_encrypt((uint32_t *)(buffer), key);
+		ft_memcpy(bytes + i, buffer, 8);
 		i += 8;
 	}
 	return (bytes);
 }
 
-char		*decrypt_binary(char *data, uint32_t size, uint32_t *key)
+void		*decrypt_binary(void *data, uint32_t size, uint32_t *key)
 {
 	uint32_t		i;
-	char			*bytes;
-	char			buffer[8];
+	void			*bytes;
+	uint8_t			buffer[8];
 
-	ft_bzero(buffer, 8);
 	bytes = NULL;
+	ft_bzero(buffer, 8);
 	if (!(bytes = ((char *)ft_memalloc(sizeof(char) * size))))
 		return (NULL);
 	i = 0;
 	while (i < size)
 	{
-		ft_strncpy(buffer, data + i, 8);
-		tea_decrypt((void *)(buffer), key);
-		ft_strncpy(bytes + i, buffer, 8);
+		ft_memcpy(buffer, data + i, 8);
+		tea_decrypt((uint32_t *)(buffer), key);
+		ft_memcpy(bytes + i, buffer, 8);
 		i += 8;
 	}
 	// Strip null char if it was added
