@@ -6,14 +6,14 @@
 #    By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/10 14:48:27 by tiboitel          #+#    #+#              #
-#    Updated: 2017/08/10 21:32:41 by tiboitel         ###   ########.fr        #
+#    Updated: 2017/10/18 17:58:31 by tiboitel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	woody_woodpacker
-SRCS		=	main.c \
-				loader.c \
-				encryption.c
+SRCS		=	packer/main.c \
+				packer/loader.c \
+				encryption/encryption.c
 INCLUDES	=	./includes
 LIBFT		=	./libft
 SRCSPATH	=	./srcs/

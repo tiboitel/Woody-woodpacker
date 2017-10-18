@@ -1,30 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   loader.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/10 17:19:40 by tiboitel          #+#    #+#             */
-/*   Updated: 2017/08/29 18:17:56 by tiboitel         ###   ########.fr       */
+/*   Created: 2017/08/10 17:36:27 by tiboitel          #+#    #+#             */
+/*   Updated: 2017/10/18 18:20:10 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "woody_woodpacker.h"
 
-int		main(int argc, char **argv)
+void	*load_binary(char *binary_path, struct stat *binary_stat)
 {
+	int				fd;
 	void			*binary;
-	struct stat		binary_stat;
+	int 			padding;
 
-	if (argc != 2)
-		return (-1);
 	binary = NULL;
-	if (!(binary = load_binary(argv[1], &binary_stat)))
+	padding = 0;
+	if 	((fd = open(binary_path, O_RDONLY)) < 0)
 	{
 		perror("woody_woodpacker: ");
-		return (-1);
+		return (NULL);
 	}
-	munmap(binary, binary_stat.st_size + 1);
-	return (0);
+	if (fstat(fd, binary_stat) < 0)
+	{
+		perror("woody_woodpacker: ");
+		return (NULL);
+	}
+	if (binary_stat->st_size % 2)
+		binary_stat->st_size++;
+	if ((binary = mmap(0, binary_stat->st_size, PROT_READ, MAP_PRIVATE, fd, 0)) == MAP_FAILED)
+	{
+		perror("woody_woodpacker: ");
+		return (NULL);
+	}
+	close(fd);
+	return (binary);
 }
