@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/10 17:33:02 by tiboitel          #+#    #+#             */
-/*   Updated: 2017/10/18 18:35:38 by tiboitel         ###   ########.fr       */
+/*   Updated: 2017/11/11 19:59:32 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,18 @@
 # define DELTA 0x9e3779b9
 # define SUM 0xC6EF3720
 # define PACKER_SEPARATOR ".packer"
+
 /*
 ** 2. Encryption section.
 **
 */
 void	tea_encrypt(uint32_t *value, uint32_t *key);
 void	tea_decrypt(uint32_t *value, uint32_t *key);
-void	*encrypt_binary(void *binary, uint32_t *size, uint32_t *key);
+void	*encrypt_binary(void *binary, uint32_t size, uint32_t *key);
 void	*decrypt_binary(void *data, uint32_t size, uint32_t *key);
 /*
 ** 3. Loader section.
 **
 */
-void	*load_binary(char *binary_pathi, struct stat *binary_stat);
+void	*load_binary(char *binary_path, struct stat *binary_stat);
 #endif
