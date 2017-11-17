@@ -6,22 +6,23 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 20:23:10 by tiboitel          #+#    #+#             */
-/*   Updated: 2017/11/11 20:30:08 by tiboitel         ###   ########.fr       */
+/*   Updated: 2017/11/17 13:05:00 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "woody_woodpacker"
-i
+#include "woody_woodpacker.h"
 
-/* Need to continue da shit */
-const char	*ft_memsearch(const char *mem_area, size_t mem_area_size,
-		const char *target, size_t target_size)
+const char *ft_memscan(const char *ptr, size_t size, const char *target, size_t 
+		target_size)
 {
- 	int		i;
+	size_t	i;
 
 	i = 0;
-	while (i < mem_area_size)
+	while (i < size)
 	{
+		if (ft_memcmp(ptr + i, target, target_size) == 0)
+			return (ptr + i);
 		i++;
 	}
+	return (NULL);
 }

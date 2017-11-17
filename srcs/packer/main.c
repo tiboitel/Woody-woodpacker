@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/10 17:19:40 by tiboitel          #+#    #+#             */
-/*   Updated: 2017/11/11 20:17:09 by tiboitel         ###   ########.fr       */
+/*   Updated: 2017/11/17 13:41:08 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int		generate_private_key(uint32_t *key)
 
 int		main(int argc, char **argv)
 {
-	extern unsigned char	woody[];
-	extern unsigned int		woody_len;
+	extern unsigned char	template[];
+	extern unsigned int		template_len;
 	void					*binary;
 	void					*packed_binary;
 	struct stat				binary_stat;
@@ -53,7 +53,8 @@ int		main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 	// Rename to woody xxd dump
-	write(packed_binary_fd, woody, woody_len);
+	write(packed_binary_fd, template, template_len);
+	write(packed_binary_fd, packer_separator, sizeof(packer_separator));
 	write(packed_binary_fd, packer_separator, sizeof(packer_separator));
 	if (generate_private_key(&private_key) == -1)
 	{
@@ -65,6 +66,7 @@ int		main(int argc, char **argv)
 	// close packed_binary_fd
 	write(packed_binary_fd, &private_key, sizeof(private_key));
 	printf("Private key: %d\n", private_key);
+	printf("Binary: %s\n", binary);
 	packed_binary = encrypt_binary(binary, (uint32_t)(binary_stat.st_size), &private_key);
 	printf("Packed binary: %s\n", packed_binary);
 	printf("Size %llu", binary_stat.st_size);

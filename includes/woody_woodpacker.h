@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/10 17:33:02 by tiboitel          #+#    #+#             */
-/*   Updated: 2017/11/11 19:59:32 by tiboitel         ###   ########.fr       */
+/*   Updated: 2017/11/17 13:20:30 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include "libft.h"
 # define DELTA 0x9e3779b9
 # define SUM 0xC6EF3720
-# define PACKER_SEPARATOR ".packer"
+# define PACKER_SEPARATOR "__THISISWOODYWOODPACKER__"
 
 /*
 ** 2. Encryption section.
@@ -40,4 +40,16 @@ void	*decrypt_binary(void *data, uint32_t size, uint32_t *key);
 **
 */
 void	*load_binary(char *binary_path, struct stat *binary_stat);
+/*
+ **
+ ** 4. Packer section.
+ **
+ */
+char	*unpack_binary(char *path, size_t *ciphered_content_length);
+/*
+ **
+ ** 5/. Utils
+ **
+ */
+const char 	*ft_memscan(const char *ptr, size_t size, const char *target, size_t target_size);
 #endif
