@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 12:28:29 by tiboitel          #+#    #+#             */
-/*   Updated: 2017/11/17 13:44:23 by tiboitel         ###   ########.fr       */
+/*   Updated: 2017/11/22 17:16:36 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,20 @@ char	*unpack_binary(char *path, size_t *ciphered_content_length)
 	if (!(binary = load_binary(path, &binary_stat)))
 		return (NULL);
 	if (!(index = ft_memscan(binary, binary_stat.st_size,
+					PACKER_SEPARATOR, sizeof(PACKER_SEPARATOR))))
+	{
+		dprintf(2, "Unable to find packer separator.\n");
+		return (NULL);
+	}
+	index += sizeof(PACKER_SEPARATOR);
+	if (!(index = ft_memscan(index, index - binary,
 					PACKER_SEPARATOR, sizeof(PACKER_SEPARATOR)) + sizeof(PACKER_SEPARATOR)))
 		return (NULL);
-	if (!(index += sizeof(PACKER_SEPARATOR) + sizeof(PACKER_SEPARATOR)))
-		return (NULL);
 	ft_memcpy(&private_key, index, sizeof(private_key));
+	dprintf(1, "Private key: %d\n", private_key);
 	index += sizeof(private_key);
 	*ciphered_content_length = binary_stat.st_size - (index - binary);
-	if (!(ciphered_content = (void *)malloc(sizeof(char) * *ciphered_content_length)))
-		return (NULL);
-	ft_memcpy(ciphered_content, index, *ciphered_content_length);
-	ciphered_content = decrypt_binary(&ciphered_content, (*(unsigned int *)ciphered_content_length), &private_key);
-	printf("Unpacked binary: %s\n", ciphered_content);
+	dprintf(1, "Ciphered content length: %zu\nContent:%s\n", *ciphered_content_length, index);
+	ciphered_content = decrypt_binary(index, (*(unsigned int *)ciphered_content_length), &private_key);
 	return (ciphered_content);
-	// TODO
 }

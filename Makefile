@@ -6,7 +6,7 @@
 #    By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/10 14:48:27 by tiboitel          #+#    #+#              #
-#    Updated: 2017/11/17 13:19:01 by tiboitel         ###   ########.fr        #
+#    Updated: 2017/11/22 16:55:22 by tiboitel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ SRCS		=	encryption/encryption.c \
 				utils/memory.c \
 				woody.c
 INCLUDES	=	./includes
-LIBFT		=	./libft
 SRCSPATH	=	./srcs/
 CC			=	gcc
 CFLAGS		=	-Wall -Werror -Wextra
@@ -29,18 +28,18 @@ OBJS		=	$(SRC:.c=.o)
 all:			$(NAME)
 
 $(NAME):		$(OBJS)
-	make -C libft
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L $(LIBFT) -lft
+	make -C srcs/template
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 %.o: %.c
 	$(CC) -o $@ $(INCLUDES_O) $(CFLAGS) -c $<
 
 clean:
-	make -C libft clean
+	make -C srcs/template clean
 	rm -rf $(OBJS)
 
 fclean:			clean
-	make -C libft fclean
+	make -C srcs/template fclean
 	rm -rf $(NAME)
 
 re: fclean all

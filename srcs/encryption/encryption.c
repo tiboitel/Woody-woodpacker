@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/10 17:57:40 by tiboitel          #+#    #+#             */
-/*   Updated: 2017/11/17 13:47:28 by tiboitel         ###   ########.fr       */
+/*   Updated: 2017/11/22 17:15:01 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ void		tea_decrypt(uint32_t *value, uint32_t *key)
 	uint8_t		k3;
 	uint32_t	sum;
 
+	sum = 0;
 	v0 = value[0];
 	v1 = value[1];
 	k0 = *key & 0xFF;
 	k1 = (*key >> 8) & 0xFF;
 	k2 = (*key >> 16) & 0xFF;
 	k3 = (*key >> 24) & 0xFF;
-
 	sum = SUM;
 	i = 0;
 	while (i++ < 32)
@@ -92,7 +92,7 @@ void		*encrypt_binary(void *binary, uint32_t size, uint32_t *key)
 	return (bytes);
 }
 
-void		*decrypt_binary(void *data, uint32_t size, uint32_t *key)
+void		*decrypt_binary(const void *data, uint32_t size, uint32_t *key)
 {
 	uint32_t		i;
 	void			*bytes;
@@ -100,7 +100,7 @@ void		*decrypt_binary(void *data, uint32_t size, uint32_t *key)
 
 	bytes = NULL;
 	ft_bzero(buffer, 8);
-	if (!(bytes = ((char *)ft_memalloc(sizeof(char) * size + 16))))
+	if (!(bytes = ((char *)ft_memalloc(sizeof(char) * size))))
 		return (NULL);
 	i = 0;
 	while (i < size)

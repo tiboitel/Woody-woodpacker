@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/10 17:19:40 by tiboitel          #+#    #+#             */
-/*   Updated: 2017/11/17 13:41:08 by tiboitel         ###   ########.fr       */
+/*   Updated: 2017/11/22 16:50:07 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int		main(int argc, char **argv)
 	}
 	// Rename to woody xxd dump
 	write(packed_binary_fd, template, template_len);
-	write(packed_binary_fd, packer_separator, sizeof(packer_separator));
 	write(packed_binary_fd, packer_separator, sizeof(packer_separator));
 	if (generate_private_key(&private_key) == -1)
 	{
