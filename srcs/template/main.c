@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 19:02:13 by tiboitel          #+#    #+#             */
-/*   Updated: 2017/11/22 18:55:34 by tiboitel         ###   ########.fr       */
+/*   Updated: 2017/11/29 15:26:00 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,26 @@ static int 		ft_getrandom(void *buf, size_t buflen, unsigned flags)
 	read(fd, buf, buflen);
 	close(fd);
 	return (0);
+}
+
+static void		start_image(const char *binary_image_path, char * const *argv, 
+		char * const *envp)
+{
+	pid_t		pid = fork();
+	if (pid < 0)
+		exit(EXIT_FAILURE); // need return value to exit properly
+	if (pid > 0)
+	{
+		wait4(pid, NULL, 0, NULL);
+		if (unlink(binary_image_path) == -1)
+			exit(EXIT_FAILURE); // Add perror usage here;
+	}
+	else
+	{
+		dprintf(1, "... WOODY ...\n");
+		execve(binary_image_path, argv, envp);
+		exit(EXIT_FAILURE);
+	}
 }
 
 char			*binary_image_create(const char *binary, size_t binary_size)
@@ -50,14 +70,13 @@ char			*binary_image_create(const char *binary, size_t binary_size)
 	return (binary_path);
 }
 
-int				main(int argc, char **argv, char const **env)
+int				main(int argc, char **argv, char * const *env)
 {
 	size_t	ciphered_content_size;
 	char	*binary = NULL;
 	char	*binary_path = NULL;
 	
 	(void)argc;
-	dprintf(1, "... WOODY ...\n");
 	ciphered_content_size = 0;
 	if (!(binary = unpack_binary(argv[0], &ciphered_content_size)))
 	{
@@ -66,6 +85,7 @@ int				main(int argc, char **argv, char const **env)
 	}
 	binary_path = binary_image_create(binary, ciphered_content_size);
 	printf("Binary path: %s\n", binary_path);
+	start_image(binary_path, argv, env);
 	free(binary);
 	free(binary_path);
 	(void)env;

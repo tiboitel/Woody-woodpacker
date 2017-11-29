@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/10 17:33:02 by tiboitel          #+#    #+#             */
-/*   Updated: 2017/11/22 18:46:12 by tiboitel         ###   ########.fr       */
+/*   Updated: 2017/11/29 16:08:13 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,16 @@
 # include <sys/stat.h>
 # include <sys/mman.h>
 # include <sys/syscall.h>
-#include <errno.h>
+# include <errno.h>
+# include <elf.h>
 # define DELTA 0x9e3779b9
 # define SUM 0xC6EF3720
 # define PACKER_SEPARATOR "GYARADOSLAUNCHHYPERBEAM"
+
+/*
+ ** Elf
+ **/
+
 
 /*
 ** 2. Encryption section.
