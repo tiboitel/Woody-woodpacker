@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/10 17:33:02 by tiboitel          #+#    #+#             */
-/*   Updated: 2017/11/29 16:08:13 by tiboitel         ###   ########.fr       */
+/*   Updated: 2018/03/06 16:48:30 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <sys/syscall.h>
 # include <errno.h>
 # include <elf.h>
+# include <mach-o/loader.h>
 # define DELTA 0x9e3779b9
 # define SUM 0xC6EF3720
 # define PACKER_SEPARATOR "GYARADOSLAUNCHHYPERBEAM"
@@ -62,4 +63,6 @@ void		*ft_memcpy(void *dst, const void *src, size_t n);
 const char 	*ft_memscan(const char *ptr, size_t size, const char *target, size_t target_size);
 void		*ft_memalloc(size_t size);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
+int			elf64_check_file(void *elffile);
+int			mach_check_file(void *mach_file);
 #endif

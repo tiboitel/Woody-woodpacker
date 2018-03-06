@@ -6,7 +6,7 @@
 #    By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/10 14:48:27 by tiboitel          #+#    #+#              #
-#    Updated: 2017/11/22 16:55:22 by tiboitel         ###   ########.fr        #
+#    Updated: 2018/03/06 14:44:07 by tiboitel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRCS		=	encryption/encryption.c \
 				packer/loader.c \
 				packer/packer.c \
 				utils/memory.c \
+				utils/elf.c \
 				woody.c
 INCLUDES	=	./includes
 SRCSPATH	=	./srcs/
