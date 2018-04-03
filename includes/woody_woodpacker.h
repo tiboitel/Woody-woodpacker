@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/10 17:33:02 by tiboitel          #+#    #+#             */
-/*   Updated: 2018/03/06 16:48:30 by tiboitel         ###   ########.fr       */
+/*   Updated: 2018/04/03 20:12:10 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,36 @@
 /*
  ** Elf
  **/
-
+typedef struct		elf64_header
+{
+	unsigned char   e_ident[16];
+	uint16_t        e_type;
+	uint16_t        e_machine;
+	uint32_t        e_version;
+	uint64_t        e_entry;
+	uint64_t        e_phoff;
+	uint64_t        e_shoff;
+	uint32_t        e_flags;
+	uint16_t        e_ehsize;
+	uint16_t        e_phentsize;
+	uint16_t        e_phnum;
+	uint16_t        e_shentsize;
+	uint16_t        e_shnum;
+	uint16_t        e_shstrndx;
+}					t_elf64_header;
 
 /*
-** 2. Encryption section.
-**
-*/
+ ** 2. Encryption section.
+ **
+ */
 void	tea_encrypt(uint32_t *value, uint32_t *key);
 void	tea_decrypt(uint32_t *value, uint32_t *key);
 void	*encrypt_binary(void *binary, uint32_t size, uint32_t *key);
 void	*decrypt_binary(const void *data, uint32_t size, uint32_t *key);
 /*
-** 3. Loader section.
-**
-*/
+ ** 3. Loader section.
+ **
+ */
 void	*load_binary(char *binary_path, struct stat *binary_stat);
 /*
  **

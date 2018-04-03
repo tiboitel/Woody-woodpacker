@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/10 17:19:40 by tiboitel          #+#    #+#             */
-/*   Updated: 2018/03/06 14:51:28 by tiboitel         ###   ########.fr       */
+/*   Updated: 2018/04/03 20:17:42 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ int		main(int argc, char **argv)
 		perror("woody_woodpacker: ");
 		return (-1);
 	}
-	if (elf64_check_file(binary) < 0)
+	printf("%s\n", binary);
+	if (mach_check_file(binary) < 0)
 	{
 		perror("woody_woodpacker: Not an Elf64 or Mach-O 64 files.");
 		return (EXIT_FAILURE);
 	}
-
 	if ((packed_binary_fd = open("woody", O_CREAT | O_TRUNC | O_RDWR, 0744)) == -1)
 	{
 		perror("woody_woodpacker: Unable to open the Woody file: ");
