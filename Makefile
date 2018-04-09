@@ -6,7 +6,7 @@
 #    By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/10 14:48:27 by tiboitel          #+#    #+#              #
-#    Updated: 2018/04/03 20:07:21 by tiboitel         ###   ########.fr        #
+#    Updated: 2018/04/10 00:14:33 by tiboitel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,11 +17,12 @@ SRCS		=	encryption/encryption.c \
 				packer/packer.c \
 				utils/memory.c \
 				utils/elf.c \
+				utils/syscall.c \
 				woody.c
 INCLUDES	=	./includes
 SRCSPATH	=	./srcs/
 CC			=	gcc
-CFLAGS		=	-Wall -Werror -Wextra
+CFLAGS		=	-Wall -Werror -Wextra -Wno-deprecated-declarations
 INCLUDES_O	=	-I $(INCLUDES) -I $(LIBFT)/includes
 SRC			=	$(addprefix $(SRCSPATH), $(SRCS))
 OBJS		=	$(SRC:.c=.o)

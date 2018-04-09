@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 19:02:13 by tiboitel          #+#    #+#             */
-/*   Updated: 2017/11/29 15:26:00 by tiboitel         ###   ########.fr       */
+/*   Updated: 2018/04/10 00:55:11 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,18 @@ static void		start_image(const char *binary_image_path, char * const *argv,
 		exit(EXIT_FAILURE); // need return value to exit properly
 	if (pid > 0)
 	{
-		wait4(pid, NULL, 0, NULL);
-		if (unlink(binary_image_path) == -1)
+		sys_wait4(pid, NULL, 0, NULL);
+		if (sys_unlink(binary_image_path) == -1)
+		{
+			perror("Woody: ");
 			exit(EXIT_FAILURE); // Add perror usage here;
+		}
 	}
 	else
 	{
-		dprintf(1, "... WOODY ...\n");
-		execve(binary_image_path, argv, envp);
+		write(1, "... WOODY ...\n", 14);
+		sys_execve(binary_image_path, argv, envp);
+		perror("Woody: ");
 		exit(EXIT_FAILURE);
 	}
 }
@@ -60,7 +64,7 @@ char			*binary_image_create(const char *binary, size_t binary_size)
 	{
 		ft_getrandom(binary_path + 5, 42, 0);
 		while (i++ < 47)
-			binary_path[i] = (unsigned char)binary_path[i] % 26 + 'a';
+			binary_path[i] = (unsigned char)binary_path[i] % 24 + 'a';
 		binary_fd = open(binary_path, O_CREAT | O_EXCL | O_WRONLY, 0700);
 		if (binary_fd == -1 && errno != EACCES)
 			exit(EXIT_FAILURE);

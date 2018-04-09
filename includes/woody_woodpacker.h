@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/10 17:33:02 by tiboitel          #+#    #+#             */
-/*   Updated: 2018/04/03 20:12:10 by tiboitel         ###   ########.fr       */
+/*   Updated: 2018/04/10 00:31:02 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@
 # include <sys/stat.h>
 # include <sys/mman.h>
 # include <sys/syscall.h>
+# include <unistd.h>
 # include <errno.h>
 # include <elf.h>
+# include <string.h>
 # include <mach-o/loader.h>
 # define DELTA 0x9e3779b9
 # define SUM 0xC6EF3720
@@ -71,7 +73,7 @@ void	*load_binary(char *binary_path, struct stat *binary_stat);
 char	*unpack_binary(char *path, size_t *ciphered_content_length);
 /*
  **
- ** 5/. Utils
+ ** 5. Utils
  **
  */
 void		ft_bzero(void *s, size_t n);
@@ -81,4 +83,16 @@ void		*ft_memalloc(size_t size);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
 int			elf64_check_file(void *elffile);
 int			mach_check_file(void *mach_file);
+
+/*
+ **
+ ** 6. Syscall
+ **
+ */
+int			sys_unlink(const char *pathname);
+int			sys_fstat(int fd, struct stat *buffer);
+int			sys_execve(const char *path, char * const *argv, char * const *envp);
+int			sys_getrandom(void *buffer, size_t buffer_length, unsigned int flags);
+pid_t		sys_wait4(pid_t pid, int *status, int options, struct rusage *rusage);
+
 #endif

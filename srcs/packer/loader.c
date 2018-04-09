@@ -6,13 +6,11 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/10 17:36:27 by tiboitel          #+#    #+#             */
-/*   Updated: 2018/04/03 20:17:45 by tiboitel         ###   ########.fr       */
+/*   Updated: 2018/04/09 23:52:52 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "woody_woodpacker.h"
-
-
 
 void	*load_binary(char *binary_path, struct stat *binary_stat)
 {

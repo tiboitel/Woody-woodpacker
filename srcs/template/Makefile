@@ -6,7 +6,7 @@
 #    By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/10 14:48:27 by tiboitel          #+#    #+#              #
-#    Updated: 2017/11/22 16:55:06 by tiboitel         ###   ########.fr        #
+#    Updated: 2018/04/10 00:15:20 by tiboitel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ SRCS		=	encryption/encryption.c \
 				template/main.c \
 				packer/loader.c \
 				packer/packer.c \
-				utils/memory.c
+				utils/memory.c \
+				utils/syscall.c
 INCLUDES	=	../../includes
 SRCSPATH	=	../../srcs/
 CC			=	gcc
