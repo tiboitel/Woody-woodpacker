@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 19:02:13 by tiboitel          #+#    #+#             */
-/*   Updated: 2018/04/10 00:55:11 by tiboitel         ###   ########.fr       */
+/*   Updated: 2018/04/10 03:14:38 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@ char			*binary_image_create(const char *binary, size_t binary_size)
 	while (binary_fd == -1)
 	{
 		ft_getrandom(binary_path + 5, 42, 0);
-		while (i++ < 47)
+		while (i++ < 46)
 			binary_path[i] = (unsigned char)binary_path[i] % 24 + 'a';
+		printf("%s\n", binary_path);
 		binary_fd = open(binary_path, O_CREAT | O_EXCL | O_WRONLY, 0700);
 		if (binary_fd == -1 && errno != EACCES)
 			exit(EXIT_FAILURE);
