@@ -32,7 +32,7 @@
 #endif
 # define DELTA 0x9e3779b9
 # define SUM 0xC6EF3720
-# define PACKER_SEPARATOR "GYARADOSLAUNCHHYPERBEAM"
+# define PACKER_SEPARATOR "__PACKERSEPARATOR__"
 
 /*
  ** Elf
@@ -96,6 +96,4 @@ int			sys_unlink(const char *pathname);
 int			sys_fstat(int fd, struct stat *buffer);
 int			sys_execve(const char *path, char * const *argv, char * const *envp);
 int			sys_getrandom(void *buffer, size_t buffer_length, unsigned int flags);
-pid_t		sys_wait4(pid_t pid, int *status, int options, struct rusage *rusage);
-
 #endif

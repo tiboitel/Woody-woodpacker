@@ -12,6 +12,11 @@
 
 #include "woody_woodpacker.h"
 
+pid_t	sys_wait4(pid_t pid, int *status, int options, struct rusage *rusage)
+{
+	return (syscall(SYS_wait4, pid, status, options, rusage));
+}
+
 static int 		ft_getrandom(void *buf, size_t buflen, unsigned flags)
 {
 	int		fd = open("/dev/urandom", O_RDONLY);
@@ -57,7 +62,7 @@ char			*binary_image_create(const char *binary, size_t binary_size)
 	i = 4;
 	binary_fd = -1;
 	binary_path = NULL;
-	if (!(binary_path = (char *)ft_memalloc(sizeof(char) * 47)))
+	if (!(binary_path = (char *)ft_memalloc(sizeof(char) * 48)))
 		return (NULL);
 	ft_memcpy(binary_path, "/tmp/", 5);
 	while (binary_fd == -1)

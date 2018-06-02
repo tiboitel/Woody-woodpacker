@@ -47,7 +47,6 @@ int		main(int argc, char **argv)
 		perror("woody_woodpacker: ");
 		return (-1);
 	}
-	printf("%s\n", binary);
 	#if __LINUX__
 	if (elf64_check_file(binary) < 0)
 	{
@@ -79,10 +78,7 @@ int		main(int argc, char **argv)
 	// close packed_binary_fd
 	write(packed_binary_fd, &private_key, sizeof(private_key));
 	printf("Private key: %d\n", private_key);
-	printf("Binary: %s\n", binary);
 	packed_binary = encrypt_binary(binary, (uint32_t)(binary_stat.st_size), &private_key);
-	printf("Packed binary: %s\n", packed_binary);
-	printf("Size %llu", binary_stat.st_size);
 	write(packed_binary_fd, packed_binary, binary_stat.st_size);
 	free(packed_binary);
 	close(packed_binary_fd);

@@ -36,7 +36,7 @@ char	*unpack_binary(char *path, size_t *ciphered_content_length)
 		return (NULL);
 	}
 	index += sizeof(PACKER_SEPARATOR);
-	if (!(index = ft_memscan(index, index - binary,
+	if (!(index = ft_memscan(index, binary - index,
 					PACKER_SEPARATOR, sizeof(PACKER_SEPARATOR)) + sizeof(PACKER_SEPARATOR)))
 		return (NULL);
 	ft_memcpy(&private_key, index, sizeof(private_key));

@@ -27,7 +27,3 @@ int		sys_execve(const char *path, char * const *argv, char * const *envp)
 	return (syscall(SYS_execve, path, argv, envp));
 }
 
-pid_t	sys_wait4(pid_t pid, int *status, int options, struct rusage *rusage)
-{
-	return (syscall(SYS_wait4, pid, status, options, rusage));
-}
