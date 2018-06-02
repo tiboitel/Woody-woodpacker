@@ -6,7 +6,7 @@
 #    By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/10 14:48:27 by tiboitel          #+#    #+#              #
-#    Updated: 2018/04/10 00:14:33 by tiboitel         ###   ########.fr        #
+#    Updated: 2018/06/02 19:45:14 by tiboitel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,11 +30,17 @@ OBJS		=	$(SRC:.c=.o)
 all:			$(NAME)
 
 $(NAME):		$(OBJS)
-	make -C srcs/template
+	@C_INCLUDE_PATH=~/.brew/include/elf
+	@make -C srcs/template
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 %.o: %.c
 	$(CC) -o $@ $(INCLUDES_O) $(CFLAGS) -c $<
+
+install:
+	@mkdir -p ~/.brew/include/
+	@mkdir -p ~/.brew/include/elf/
+	@curl https://raw.github.com/gist/3885346/elf.h | tee ~/.brew/include/elf/elf.h
 
 clean:
 	make -C srcs/template clean
