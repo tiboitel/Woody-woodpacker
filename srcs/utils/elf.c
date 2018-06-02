@@ -6,12 +6,13 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 14:33:43 by tiboitel          #+#    #+#             */
-/*   Updated: 2018/04/03 21:12:50 by tiboitel         ###   ########.fr       */
+/*   Updated: 2018/06/02 20:06:12 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "woody_woodpacker.h"
 
+#if __linux__
 int		elf64_check_file(void *elffile)
 {
 	t_elf64_header *file_hdr = (t_elf64_header *)elffile;
@@ -23,7 +24,7 @@ int		elf64_check_file(void *elffile)
 		return (-1);	/* not an elf file */
 	return (1);
 }
-
+#elif __APPLE__ 
 int		mach_check_file(void *mach_file)
 {
 	unsigned int magic_number = *(int *)(mach_file);
@@ -34,3 +35,4 @@ int		mach_check_file(void *mach_file)
 		return (-1);
 	return (1);
 }
+#endif

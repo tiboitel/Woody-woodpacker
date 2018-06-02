@@ -6,7 +6,7 @@
 #    By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/10 14:48:27 by tiboitel          #+#    #+#              #
-#    Updated: 2018/04/10 00:15:20 by tiboitel         ###   ########.fr        #
+#    Updated: 2018/06/02 19:55:19 by tiboitel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ all:			$(NAME)
 
 $(NAME):		$(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
-	xxd -i $(NAME) > ../woody.c
+	/usr/bin/xxd -i $(NAME) > ../woody.c
 
 %.o: %.c
 	$(CC) -o $@ $(INCLUDES_O) $(CFLAGS) -c $<

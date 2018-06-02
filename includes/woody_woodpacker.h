@@ -6,7 +6,7 @@
 /*   By: tiboitel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/10 17:33:02 by tiboitel          #+#    #+#             */
-/*   Updated: 2018/04/10 00:31:02 by tiboitel         ###   ########.fr       */
+/*   Updated: 2018/06/02 20:07:09 by tiboitel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,12 @@
 # include <sys/syscall.h>
 # include <unistd.h>
 # include <errno.h>
-# include <elf.h>
 # include <string.h>
+#if __linux__
+# include <elf.h>
+#elif __APPLE__
 # include <mach-o/loader.h>
+#endif
 # define DELTA 0x9e3779b9
 # define SUM 0xC6EF3720
 # define PACKER_SEPARATOR "GYARADOSLAUNCHHYPERBEAM"
