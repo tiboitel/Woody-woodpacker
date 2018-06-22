@@ -26,13 +26,20 @@ CFLAGS		=	-Wall -Werror -Wextra -Wno-deprecated-declarations
 INCLUDES_O	=	-I $(INCLUDES) -I $(LIBFT)/includes
 SRC			=	$(addprefix $(SRCSPATH), $(SRCS))
 OBJS		=	$(SRC:.c=.o)
+ifeq ($(UNAME_S),Linux)
+	OSFILE += ../encryption/tea_elf.o
+endif
+ifeq ($(UNAME_S),Darwin)
+	OSFILE += ../encryption/tea.o
+endif
+
 
 all:			$(NAME)
 
 $(NAME):		$(OBJS)
 #	@C_INCLUDE_PATH=~/.brew/include/elf
 	@make -C srcs/template
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) srcs/encryption/tea.o
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(OSFILE)
 
 %.o: %.c
 	$(CC) -o $@ $(INCLUDES_O) $(CFLAGS) -c $<
