@@ -26,6 +26,7 @@ CFLAGS		=	-Wall -Werror -Wextra -Wno-deprecated-declarations
 INCLUDES_O	=	-I $(INCLUDES) -I $(LIBFT)/includes
 SRC			=	$(addprefix $(SRCSPATH), $(SRCS))
 OBJS		=	$(SRC:.c=.o)
+UNAME_S 	:= $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	OSFILE += srcs/encryption/tea_elf.o
 endif
