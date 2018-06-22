@@ -27,10 +27,10 @@ INCLUDES_O	=	-I $(INCLUDES) -I $(LIBFT)/includes
 SRC			=	$(addprefix $(SRCSPATH), $(SRCS))
 OBJS		=	$(SRC:.c=.o)
 ifeq ($(UNAME_S),Linux)
-	OSFILE += ../encryption/tea_elf.o
+	OSFILE += srcs/encryption/tea_elf.o
 endif
 ifeq ($(UNAME_S),Darwin)
-	OSFILE += ../encryption/tea.o
+	OSFILE += srcs/encryption/tea.o
 endif
 
 
