@@ -24,17 +24,29 @@ CFLAGS		=	-Wall -Wextra -Wno-deprecated-declarations
 INCLUDES_O	=	-I $(INCLUDES)
 SRC			=	$(addprefix $(SRCSPATH), $(SRCS))
 OBJS		=	$(SRC:.c=.o)
+OSFLAG 		:=
+UNAME_S 	:= $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	OSFILE += ../encryption/tea_elf.o
+	OSCOMP += nasm -f elf64 ../encryption/tea_elf.s
+endif
+ifeq ($(UNAME_S),Darwin)
+	OSFILE += ../encryption/tea.o
+	OSCOMP += nasm -f macho64 ../encryption/tea.s
+endif
+
+
 
 all:			$(NAME)
 
 $(NAME):		$(OBJS)
 
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) ../encryption/tea.o
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(OSFILE)
 	/usr/bin/xxd -i $(NAME) > ../woody.c
 
 %.o: %.c
 	$(CC) -o $@ $(INCLUDES_O) $(CFLAGS) -c $<
-	nasm -f macho64 ../encryption/tea.s
+	$(OSCOMP)
 
 clean:
 	rm -rf $(OBJS)
