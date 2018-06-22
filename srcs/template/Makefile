@@ -20,7 +20,7 @@ SRCS		=	encryption/encryption.c \
 INCLUDES	=	../../includes
 SRCSPATH	=	../../srcs/
 CC			=	gcc
-CFLAGS		=	-Wall -Wextra
+CFLAGS		=	-Wall -Wextra -Wno-deprecated-declarations
 INCLUDES_O	=	-I $(INCLUDES)
 SRC			=	$(addprefix $(SRCSPATH), $(SRCS))
 OBJS		=	$(SRC:.c=.o)
@@ -28,11 +28,13 @@ OBJS		=	$(SRC:.c=.o)
 all:			$(NAME)
 
 $(NAME):		$(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) ../encryption/tea.o
 	/usr/bin/xxd -i $(NAME) > ../woody.c
 
 %.o: %.c
 	$(CC) -o $@ $(INCLUDES_O) $(CFLAGS) -c $<
+	nasm -f macho64 ../encryption/tea.s
 
 clean:
 	rm -rf $(OBJS)

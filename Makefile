@@ -32,7 +32,7 @@ all:			$(NAME)
 $(NAME):		$(OBJS)
 #	@C_INCLUDE_PATH=~/.brew/include/elf
 	@make -C srcs/template
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) srcs/encryption/tea.o
 
 %.o: %.c
 	$(CC) -o $@ $(INCLUDES_O) $(CFLAGS) -c $<
