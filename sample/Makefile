@@ -15,7 +15,7 @@ SRCS		=	main.c
 INCLUDES	=	./includes
 SRCSPATH	=	./
 CC			=	gcc
-CFLAGS		=	-Wall -Werror -Wextra --target=i386-unknown-linux-gnu 
+CFLAGS		=	-Wall -Werror -Wextra -m32
 INCLUDES_O	=	-I $(INCLUDES) -I $(LIBFT)/includes
 SRC			=	$(addprefix $(SRCSPATH), $(SRCS))
 OBJS		=	$(SRC:.c=.o)

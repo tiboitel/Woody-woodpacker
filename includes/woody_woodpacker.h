@@ -25,6 +25,7 @@
 # include <unistd.h>
 # include <errno.h>
 # include <string.h>
+# include <sys/resource.h>
 #if __linux__
 # include <elf.h>
 #elif __APPLE__
